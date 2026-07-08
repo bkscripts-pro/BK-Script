@@ -1,4 +1,4 @@
--- BK CLIENT V3
+-- BK CLIENT V3.0 – OTIMIZADO (OFUSCADO)
 local a = game:GetService("TweenService")
 local b = game:GetService("UserInputService")
 local c = game:GetService("RunService")
@@ -141,10 +141,21 @@ B.Visible = false
 B.ScrollBarThickness = 2
 B.ScrollBarImageColor3 = Color3.fromRGB(60, 60, 70)
 Instance.new("UIListLayout", B).Padding = UDim.new(0, 8)
+-- NOVA ABA: OTIMIZAÇÃO
+local OptPage = Instance.new("ScrollingFrame", y)
+OptPage.Size = UDim2.new(1, 0, 1, 0)
+OptPage.BackgroundTransparency = 1
+OptPage.Visible = false
+OptPage.ScrollBarThickness = 2
+OptPage.ScrollBarImageColor3 = Color3.fromRGB(60, 60, 70)
+Instance.new("UIListLayout", OptPage).Padding = UDim.new(0, 8)
+-- FIM NOVA ABA
+
 local C = {
     {Name = "VISUAL", Page = z},
     {Name = "MIRA", Page = A},
-    {Name = "EXTRAS", Page = B}
+    {Name = "EXTRAS", Page = B},
+    {Name = "OTIMIZA", Page = OptPage}   -- ADICIONADO
 }
 local D = {}
 for E, F in ipairs(C) do
@@ -161,6 +172,7 @@ for E, F in ipairs(C) do
         z.Visible = false
         A.Visible = false
         B.Visible = false
+        OptPage.Visible = false   -- esconde a nova página também
         F.Page.Visible = true
         for H, I in pairs(D) do
             I.TextColor3 = Color3.fromRGB(140, 140, 150)
@@ -259,6 +271,7 @@ local function S(K, L, M, O, P, Q)
         Y = false
     end)
 end
+-- ========== CONTEÚDO DAS ABAS (mantido) ==========
 J("ESP Esqueleto", z, function(v) _G.ESP_Skeleton = v end)
 J("ESP Box", z, function(v) _G.ESP_Box = v end)
 J("ESP Nome", z, function(v) _G.ESP_Name = v end)
@@ -310,6 +323,18 @@ S("Velocidade", B, 16, 100, function(v)
         if a6 then a6.WalkSpeed = v end
     end
 end, 50)
+
+-- ========== NOVAS FUNÇÕES DE OTIMIZAÇÃO ==========
+J("Remover Grama", OptPage, function(v)
+    -- v = true -> remove grama (decoração do terreno)
+    workspace.Terrain.Decoration = not v
+end)
+J("Remover Sombras", OptPage, function(v)
+    game.Lighting.GlobalShadows = not v
+    -- se quiser desligar também sombras de objetos individuais, mas só isso já ajuda
+end)
+-- ========== FIM NOVAS FUNÇÕES ==========
+
 local a4, a5
 do
     local a7
